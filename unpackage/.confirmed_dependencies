@@ -1,0 +1,290 @@
+{
+	"login.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"images/user-photo.png",
+			"js/config.js",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"main.html"
+		]
+	},
+	"main.html": {
+		"resources": [
+			"js/app.js",
+			"images/yuantiao.jpg",
+			"images/img1.png",
+			"fonts/mui.ttf",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"images/user-photo.png",
+			"js/config.js",
+			"images/qq.png",
+			"css/feedback-page.css",
+			"images/top.net.ico"
+		],
+		"refer": [
+			"My/MyProjectList.html",
+			"SmallMatterList.html",
+			"My/NewApplication.html",
+			"My/MyApplicationList.html",
+			"ManitoDetail.html",
+			"ProjectDetail.html",
+			"My/MyRecord.html",
+			"StatisticalDetail.html",
+			"My/MyProfile.html",
+			"My/MyRecord1.html",
+			"self-rank.html",
+			"My/MyRank.html",
+			"My/pullrefresh_with_tab.html",
+			"About Us.html"
+		]
+	},
+	"My/MyProjectList.html": {
+		"resources": [
+			"My/MyProjectList_Sub.html",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/config.js",
+			"My/MyProjectList_Sub1.html"
+		],
+		"refer": [
+			"My/MyProjectList_Sub.html",
+			"My/MyProjectList_Sub1.html",
+			"select.html",
+			"My/CreateApplication.html"
+		]
+	},
+	"SmallMatterList.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"SmallMatterList_Sub.html",
+			"css/mui.min.css",
+			"js/config.js"
+		],
+		"refer": [
+			"SmallMatterList_Sub.html"
+		]
+	},
+	"ProjectList.html": {
+		"resources": [
+			"ProjectList_Sub.html",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/config.js"
+		],
+		"refer": [
+			"ProjectList_Sub.html"
+		]
+	},
+	"SmallMatterList_Sub.html": {
+		"refer": [
+			"ProjectList.html"
+		],
+		"resources": []
+	},
+	"My/NewApplication.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/config.js"
+		],
+		"refer": []
+	},
+	"My/MyApplicationList.html": {
+		"resources": [
+			"js/mui.min.js",
+			"My/MyApplicationList_Sub.html",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/config.js"
+		],
+		"refer": [
+			"My/MyApplicationList_Sub.html",
+			"My/NewApplication.html"
+		]
+	},
+	"My/MyApplicationList_Sub.html": {
+		"resources": [
+			"images/shuijiao.jpg"
+		],
+		"refer": []
+	},
+	"ProjectList_Sub.html": {
+		"resources": [
+			"images/yuantiao.jpg",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/config.js",
+			"images/qq.png",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"ProjectDetail.html"
+		]
+	},
+	"My/MyProjectList_Sub.html": {
+		"resources": [
+			"images/shuijiao.jpg",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/config.js",
+			"fonts/mui.ttf",
+			"/images/qq.png",
+			"images/qq.png",
+			"images/top.net.ico",
+			"images/yuantiao.jpg",
+			"images/muwu.jpg",
+			"css/add.css"
+		],
+		"refer": [
+			"ProjectDetail.html"
+		]
+	},
+	"ProjectDetail.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/config.js",
+			"My/MyRecord.html"
+		],
+		"refer": [
+			"My/MyRecord.html"
+		]
+	},
+	"ManitoDetail.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/config.js"
+		],
+		"refer": []
+	},
+	"My/MyRecord.html": {
+		"resources": [
+			"images/yuantiao.jpg",
+			"images/muwu.jpg",
+			"images/top.net.ico",
+			"images/shuijiao.jpg",
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/config.js",
+			"ProjectDetail.html"
+		],
+		"refer": [
+			"ProjectDetail.html"
+		]
+	},
+	"StatisticalDetail.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/config.js"
+		],
+		"refer": []
+	},
+	"My/MyProfile.html": {
+		"resources": [
+			"js/mui.view.js",
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"images/user-photo.png",
+			"js/config.js"
+		],
+		"refer": []
+	},
+	"My/MyProjectList_Sub1.html": {
+		"resources": [
+			"images/qq.png"
+		]
+	},
+	"My/MyRecord1.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/config.js"
+		]
+	},
+	"select.html": {
+		"resources": [
+			"js/date.js",
+			"css/person.css",
+			"css/common.css",
+			"js/iscroll.js",
+			"js/jquery-2.1.4.min.js",
+			"css/bootstrap.min.css"
+		]
+	},
+	"My/CreateApplication.html": {
+		"resources": [
+			"js/mui.picker.min.js",
+			"css/mui.picker.min.css",
+			"js/jquery-2.1.4.min.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/config.js",
+			"js/app.js"
+		]
+	},
+	"self-rank.html": {
+		"resources": [
+			"css/rank.css",
+			"js/mui.listpicker.js",
+			"js/mui.poppicker.js",
+			"css/mui.listpicker.css",
+			"js/city.data.js",
+			"css/mui.poppicker.css",
+			"js/jquery-2.1.4.min.js",
+			"js/city.data-3.js",
+			"css/bootstrap.min.css"
+		]
+	},
+	"My/MyRank.html": {
+		"resources": [
+			"css/mui.listpicker.css",
+			"css/mui.poppicker.css",
+			"js/jquery-2.1.4.min.js",
+			"css/bootstrap.min.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/config.js",
+			"js/mui.listpicker.js",
+			"js/mui.poppicker.js"
+		]
+	},
+	"My/pullrefresh_with_tab.html": {
+		"resources": [
+			"js/mui.pullToRefresh.js",
+			"js/mui.pullToRefresh.material.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/config.js"
+		]
+	},
+	"About Us.html": {
+		"resources": [
+			"js/jquery-2.1.4.min.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		]
+	}
+}

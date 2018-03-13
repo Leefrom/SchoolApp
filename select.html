@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title></title>
+    <link href="./css/mui.min.css" rel="stylesheet"/>
+    <link href="./css/person.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="./css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./css/common.css"/>
+
+</head>
+<style>
+    body{
+        font-family: "microsoft yahei";
+        overflow-y:auto;
+        overflow-x: hidden;
+    }
+</style>
+
+<header class="navigation_bar" id="headerlist">
+    <a class="mui-action-back mui-icon  mui-icon-left-nav mui-pull-left"
+       style="padding-left:8px;padding-top: 10px;color: #ffffff;text-decoration: none" onclick="javascript:history.back(-1);"></a>
+
+    <p class="titlefont">查询</p>
+</header>
+<br/>
+
+<div style="margin-left: 30px;margin-top: 50px;">
+    <div class="dropdown">
+        <label class="listfont">事项大类</label>
+        <input id="result_Bitem" class="dropdown-toggle drop" data-toggle="dropdown" placeholder="事项大类"
+               readonly="readonly" style="width: 230px"/>
+        <ul class="dropdown-menu" id="dropdownlist" style="margin-left: 75px;"></ul>
+    </div>
+
+    <div class="dropdown" style="margin-top: 10px">
+        <label class="listfont">事项小类</label>
+        <input id="result_Sitem" class="dropdown-toggle drop" data-toggle="dropdown" placeholder="事项小类"
+               readonly="readonly" style="width: 230px"/>
+        <ul class="dropdown-menu dropdown-menu-left" id="dropdownlist1" style="margin-left: 75px;"></ul>
+    </div>
+
+    <div style="margin-top: 15px">
+        <label class="listfont ">开始时间</label>
+        <input id="plan_start" class="kbtn drop" style="margin-top: -40px;width: 230px" placeholder="开始时间"/>
+
+    </div>
+
+    <div style="margin-top: 15px">
+        <label class="listfont ">结束时间</label>
+        <input id="plan_end" class="kbtn drop" style="margin-top: -40px;width: 230px" placeholder="结束时间"/>
+
+    </div>
+    <div id="datePlugin"></div>
+</div>
+<br/>
+<br/>
+
+<!--<input type="button"-->
+       <!--style="font-family:'微软雅黑';line-height:10px;font-size:16px;background-color: #FF6900;width:80%;height:10%;margin-left: 10%;"-->
+       <!--value="确认" onclick="sub()"/>-->
+<a id="btn" class="btn-confirm" onclick="sub()">确定</a>
+
+
+
+
+
+
+<script src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/date.js"></script>
+<script type="text/javascript" src="js/iscroll.js"></script>
+<script src="js/mui.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+    $(function () {
+        $('#plan_start').date();
+        $('#plan_end').date();
+    });
+</script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+    //     事项大类
+    $(function () {
+        $("#result_Bitem").val("");
+        $("#result_Sitem").val("");
+        $.ajax('/service/S_GetBigSmallClass.aspx', {
+            data: {},
+            type: 'post', //HTTP请求类型
+            dataType: 'json',
+            timeout: 10000, //超时时间设置为10秒；
+            success: function (name) {
+                var html = "";
+                for (var i = 0; i < name.Table.length; i++) {
+                    html += "<li id='BID" + i + "'  class='pop' onclick='check(\"BID" + i + "\",\"result_Bitem\",\"" + name.Table[i].S_ProjectId + "\")'  value='" + name.Table[i].S_ProjectId + "'>";
+                    html += "<a value='" + i + "'>" + name.Table[i].S_ProjectName + "</a>";
+                    html += "</li>";
+                    document.getElementById("dropdownlist").innerHTML = html;
+                }
+            },
+            error: function (xhr, type, errorThrown) { //获取ajax的错误信息
+                if (type == 'abort') {
+                    alert("网络异常，请重新检查网络");
+                    history.go(-1);
+                } else if (type == 'timeout') {
+                    alert("网络连接超时");
+                    history.go(-1);
+                }
+            }
+        });
+        //
+        //
+    });
+    //将弹出菜单选择的结果填入对应文本框中，事项大类
+    function check(id, resultid, matterid) { //matterid用来将大类传给对应小类
+        //        	$("result_Sitem").innerHTML="事项小类";
+        //引用选项序列号
+        var o = document.getElementById(id);
+        //获取要填写的元素的内容，这里元素为a标签
+        //            var result = document.getElementById(resultid).innerHTML;
+        if (o != null) {
+            var value = o.children[0].innerHTML; //获取label的内容，这里获取大类名称
+            document.getElementById(resultid).value = value; //更改要填写的a标签的内容
+            document.getElementById(resultid).style.fontSize="15px";
+            document.getElementById(resultid).style.color = "black"; //设置填写内容的颜色
+            Small(matterid); //将大类名传给对应小类
+        }
+    }
+    //      隐藏的事项小类弹出菜单
+
+    function Small(bid) {
+        $.ajax('/service/S_GetBigSmallClass.aspx', {
+            data: {
+                parentId: bid
+            },
+            type: 'post', //HTTP请求类型
+            dataType: 'json',
+            timeout: 10000, //超时时间设置为10秒；
+            success: function (name1) {
+                var html = "";
+                for (var i = 0; i < name1.Table.length; i++) {
+                    html += "<li id='SID" + i + "' class='pop' onclick='check1(\"SID" + i + "\",\"result_Sitem\",\"" + name1.Table[i].S_ProjectId + "\")' value='" + name1.Table[i].S_ProjectId + "'>";
+                    html += "<a   value='" + i + "'>" + name1.Table[i].S_ProjectName + "</a>";
+                    html += "</li>";
+                }
+                document.getElementById("dropdownlist1").innerHTML = html;
+            },
+            error: function (xhr, type, errorThrown) { //获取ajax的错误信息
+                if (type == 'abort') {
+                    alert("网络异常，请重新检查网络");
+                    history.go(-1);
+                } else if (type == 'timeout') {
+                    alert("网络连接超时");
+                    history.go(-1);
+                }
+            }
+        });
+    }
+    //将弹出菜单选择的结果填入对应文本框中，填入事项小类
+
+    function check1(id, resultid) {
+        var o = document.getElementById(id);
+        var result = document.getElementById(resultid).innerHTML;
+        if (o != null) {
+            var value = o.children[0].innerHTML;
+            document.getElementById(resultid).value = value;
+            document.getElementById(resultid).style.fontSize="15px";
+            document.getElementById(resultid).style.color = "black";
+        }
+    }
+    //确认提交
+
+    function sub() {
+        var bname = document.getElementById("result_Bitem").value;
+        var sname = document.getElementById("result_Sitem").value;
+        var start = document.getElementById("plan_start").value;
+        var end = document.getElementById("plan_end").value;
+        if (start == "" || end == "" || bname == "" || sname == "") {
+            alert("请选择要查询的完整信息");
+        } else {
+            var selfhref = "select-result.html?bigclass=" + escape(bname) + "&smallclass=" + escape(sname) + "&planstart=" + start + "&planend=" + end;
+            window.location.href = selfhref;
+        }
+    }
+    
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="css/mui.css"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <!--<link rel="stylesheet" href="css/bootstrap.css"/>-->
+    <link rel="stylesheet" href="css/rank.css"/>
+    <link rel="stylesheet" href="css/mui.poppick/er.css"/>
+    <link href="css/mui.listpicker.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/mui.picker.css"/>
+    <script src="js/mui.min.js"></script>
+    <title></title>
+    <style>
+        .mui-bar {
+            background-color: #659900;
+        }
+        .caret{
+        	color: #000000;
+        }
+    </style>
+</head>
+<body>
+	
+
+<div class="container">
+<header class="mui-bar" id="headerlist" style="height: 44px">
+    <div class="layout">
+        <div class="input">
+            请选择排名类型<span class="caret" style="color：#black;"></span>
+        </div>
+        <!--<div id="arrow" hidden="hidden"></div>-->
+        <div id="sub" class="">
+            <ul>
+                <li>成绩</li>
+                <li>事项</li>
+                <li>综测</li>
+            </ul>
+        </div>
+
+
+    </div>
+    <div style="margin-top:21px" id="score-select" hidden="hidden">
+        <button id="selectone" class="mui-btn" style="width: 190px;margin-left: -10px" onclick="selectitem()">学期排名
+        </button>
+        <button class="mui-btn" style="width: 190px;margin-left: 50%;margin-top:-34px;margin-right: 10px">总排名</button>
+    </div>
+
+</header>
+
+<div class="mui-poppicker mui-active" id="selectitem" style="display:none">
+    <div class="mui-poppicker-header">
+        <button class="mui-btn mui-poppicker-btn-cancel" id="cancel" onclick="$('#selectitem').hide('2000')">取消</button>
+        <button class="mui-btn mui-btn-blue mui-poppicker-btn-ok" id="ok" onclick="$('#selectitem').hide('2000')">确定</button>
+        <div class="mui-poppicker-clear"></div>
+    </div>
+    <div class="mui-poppicker-body">
+        <div class="mui-picker" style="width: 100%;">
+            <div class="mui-picker-inner">
+                <div class="mui-pciker-rule mui-pciker-rule-ft"></div>
+                <ul class="mui-pciker-list" id="dropdownlist"
+                    style="transform: perspective(1000px) rotateY(0deg) rotateX(0deg); transition: 100ms ease-out;">
+                </ul>
+                <div class="mui-pciker-rule mui-pciker-rule-bg"></div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="score-detail" style="margin-top: 120px" class="" hidden="hidden" >
+        <table class="table">
+            <tr>
+                <th>分类</th>
+                <th>名次</th>
+            </tr>
+            <tr>
+                <td>算数平均分</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>学分加权平均分</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>平均学分绩点</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>学分绩点和</td>
+                <td>1</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<!--<div id='userPicker' class="mui-listpicker">-->
+<!--<div class="mui-listpicker-inner">-->
+<!--<ul>-->
+<!--<li data-value="ywj">董事长 叶文洁</li>-->
+<!--<li data-value="aaa">总经理 艾AA</li>-->
+<!--<li data-value="lj">罗辑</li>-->
+<!--<li data-value="ymt">云天明</li>-->
+<!--<li data-value="shq">史强</li>-->
+<!--<li data-value="zhbh">章北海</li>-->
+<!--<li data-value="zhy">庄颜</li>-->
+<!--<li data-value="gyf">关一帆</li>-->
+<!--<li data-value="zhz">智子</li>-->
+<!--<li data-value="gezh">歌者</li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--</div>-->
+
+
+<script src="js/jquery-2.1.4.min.js"></script>
+
+<script src="js/mui.picker.js"></script>
+<script src="js/mui.poppicker.js"></script>
+<script src="js/mui.listpicker.js"></script>
+<script src="js/city.data.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    mui.init();
+    var user = getCookie("User");
+
+//这边是哪一种排名选择
+    $('.input').click(function () {
+        //缓存$('.input'),方便下面使用
+        var self = $(this);
+        //利用冒泡,将点击事件绑定在div上,不需要每个li都绑定click事件
+        self.next('#sub').show().click(function (e) {
+            self.html($(e.target).text() + '<span class="caret">');
+            if($(e.target).text()== '成绩'){
+               $('#score-select').show('slow');
+               $('#score-detail').show('slow');
+               }else{
+               $('#score-select').hide('slow');
+               $('#score-detail').hide('slow');
+               }
+//                    event.stopPropagation();
+//                    $('#sub').hide();
+//                if(!($(e.target))){
+//                  $(this).hide()
+//                 }
+            $(this).hide();
+        }
+        );
+    });
+//
+
+
+    function selectitem() {
+//        $("#selectitem").animate({height:200},"slow");
+        $('#selectitem').toggle("slow");
+
+        $.ajax('/service/S_SelectTerm.aspx', {
+            data: {
+                usernum: user
+            },
+            datatype: 'json',
+            type: 'get',
+            success: function (cc) {
+                var d = eval("(" + cc + ")") //这句话是将json语句对象化
+                var html = "";
+                for (var i = 0; i < d.Table.length; i++) {
+                    if (i < 5) {
+                        var b = -i * 20;
+                        html += "<li class='visible highlight literm' style='transform:rotateX(" + b + ")'>";
+                        html += "<a value='" + i + "' style='text-decoration:none;display:inline-block;' onclick=''>" + d.Table[i].S_TermYear + "学年</a><a style='display:inline-block;'>第" + d.Table[i].S_TermNum + "学期</a>";
+                        html += "</li>"
+                    }
+                    else {
+                        var b = -i * 20;
+                        html += "<li class='literm' style='transform:rotateX(" + b + ")'>";
+                        html += "<a value='" + i + "' style='text-decoration:none;display:inline-block;'>" + d.Table[i].S_TermYear + "学年</a><a style='display:inline-block;'>第" + d.Table[i].S_TermNum + "学期</a>";
+                        html += "</li>";
+                    }
+                }
+                document.getElementById("dropdownlist").innerHTML = html;
+            },
+            error: function (m) { //获取ajax的错误信息
+                console.log(m.responseText);
+            }
+        });
+
+
+    }
+    function getCookie(name) {
+        var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+        if (arr = document.cookie.match(reg))
+            return unescape(arr[2]);
+        else
+            return null;
+    }
+
+
+</script>
+<script>
+
+
+    //            (function($, doc) {
+    //                $.init();
+    //                $.ready(function() {
+    //                    //普通示例
+    //                    var userPicker = new $.PopPicker();
+    //                    userPicker.setData([{
+    //                        value: 'ywj',
+    //                        text: '董事长 叶文洁'
+    //                    }, {
+    //                        value: 'aaa',
+    //                        text: '总经理 艾AA'
+    //                    }, {
+    //                        value: 'lj',
+    //                        text: '罗辑'
+    //                    }, {
+    //                        value: 'ymt',
+    //                        text: '云天明'
+    //                    }, {
+    //                        value: 'shq',
+    //                        text: '史强'
+    //                    }, {
+    //                        value: 'zhbh',
+    //                        text: '章北海'
+    //                    }, {
+    //                        value: 'zhy',
+    //                        text: '庄颜'
+    //                    }, {
+    //                        value: 'gyf',
+    //                        text: '关一帆'
+    //                    }, {
+    //                        value: 'zhz',
+    //                        text: '智子'
+    //                    }, {
+    //                        value: 'gezh',
+    //                        text: '歌者'
+    //                    }]);
+    //                    var showUserPickerButton = doc.getElementById('showUserPicker');
+    //                    var userResult = doc.getElementById('userResult');
+    //                    showUserPickerButton.addEventListener('tap', function(event) {
+    //                        userPicker.show(function(items) {
+    //                            userResult.innerText = JSON.stringify(items[0]);
+    //                            //返回 false 可以阻止选择框的关闭
+    //                            //return false;
+    //                        });
+    //                    }, false);
+    //                });
+    //            })(mui, document);
+
+</script>
+
+
+</body>
+</html>
